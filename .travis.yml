@@ -1,0 +1,25 @@
+language: go
+go:
+- 1.x
+script:
+- GOOS=linux GOARCH=amd64 go build -o release/wayhelp-x86_64
+- GOOS=linux GOARCH=386 go build -o release/wayhelp-i386
+- GOOS=linux GOARCH=arm GOARM=5 go build -o release/wayhelp-armv5l
+- GOOS=linux GOARCH=arm GOARM=6 go build -o release/wayhelp-armv6l
+- GOOS=linux GOARCH=arm GOARM=7 go build -o release/wayhelp-armv7l
+- GOOS=linux GOARCH=arm64 go build -o release/wayhelp-armv8l
+deploy:
+  provider: releases
+  api_key:
+    secure: XGOvG7nUDV/FIcP+kDM8VDG7hlsr9uJcENS/SZRIqd3qtrp4GsTLrQ0Td36TKPyNVQmiZuzyW9qkPvMG7kniadi1f1iM/pjSo+vUVF2HwZi1B4MTafxl/HTJA1/9xD02Lrlqifbm06oaUOHLpeySS8fXRpi0/9bZaG3HLF5cPkGXL5VGUETtWErTlNebmTx2NG7GCl77eUmJvwuYSThuelI6DIDtCBT2j+N6hETfOrpmzBdwR4knHE7org2zX3YHb2NPAkYfrc6QSzEnpayXlt0sqMXiXGeaebyzo1SmcQTvISCzypPgnwM3vHZkNC5vZXUhrin42Me907ei6+58sXkD/uimmvyzkKDhv2y/Zm3TjQ4KPwS9dxQ7IcWipvtPxYCVwSgC4i0ro6DEDkBXIFu0TxZoWgtUVGyc6f/hSuEpWdUqAz/9JjU5iSSKR4Q0jw/FsQeiMQclGqoSxr+9JQ+ZhZcHaJ7Gn65MhpiCfzPn/4N/X6/niET694O4sJEQoNspMEOE6D8hsUN+jEtLzKJ6HtAf3AzPy3Iaf2yZsKrKG2yAEQpU1Ql31D8UP5pP0I8X8MwOwqLhci60ZWbZp3q2TCDnZb3GfxMZZJdL9RH+nsDJXz5jKqsd0oRBkibt+XPJrr8AQ3a0tM66izQyc873oVgurSEx1bs3sanxKng=
+  skip_cleanup: true
+  file:
+    - release/wayhelp-x86_64
+    - release/wayhelp-i386
+    - release/wayhelp-armv5l
+    - release/wayhelp-armv6l
+    - release/wayhelp-armv7l
+    - release/wayhelp-armv8l
+  on:
+    repo: gumieri/wayhelp
+    tags: true
